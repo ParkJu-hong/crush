@@ -1,14 +1,37 @@
-import { findAllStoreService } from '../services/store.service.js';
+import {
+    findAllStoreService,
+    findStoreByNameService,
+    createStoreService,
+    deleteStoreService,
+} from '../services/store.service.js';
 
-export const findAllStoreController = async (req, res) => {
-    const real_reuslt = await findAllStoreService().then((data) => {
+export const findAllStoreController = async () => {
+    return await findAllStoreService().then((data) => {
         const result = data.map((row) => ({
             id: row.id,
             name: row.name
         }));
-        console.log("result : ", JSON.stringify(result));
         return result;
     });
-    console.log("real_reuslt : ", real_reuslt);
-    return real_reuslt;
+}
+
+// 특정 store 조회
+export const findStoreByNameController = async (store_name) => {
+    return await findStoreByNameService(store_name).then((data) =>{
+        return data;
+    })
+}
+
+// store 추가
+export const createStoreController = async (store_name) => {
+    return await createStoreService(store_name).then((data) =>{
+        return data;
+    })
+}
+
+// store 삭제
+export const deleteStoreController = async (store_id) => {
+    return await deleteStoreService(store_id).then((data) =>{
+        return data;
+    })
 }

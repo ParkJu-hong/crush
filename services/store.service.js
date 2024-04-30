@@ -20,8 +20,8 @@ export const findAllStoreService = async () => {
 
 // 특정 store 조회
 export const findStoreByNameService = (store_name) => {
-    return Promise((resolve, reject) => {
-        connection.query(`select * from store where name like '${store_name}'`, (error, results, fields) => {
+    return new Promise((resolve, reject) => {
+        connection.query(`select * from store where name like '%${store_name}%'`, (error, results, fields) => {
             if (error) reject(error);
             else resolve(results);
         });
@@ -30,8 +30,8 @@ export const findStoreByNameService = (store_name) => {
 
 // store 추가
 export const createStoreService = (store_name) => {
-    return Promise((resolve, reject) => {
-        connection.query(`insert into stroe (name) values ('${store_name}')`, (error, results, fields) => {
+    return new Promise((resolve, reject) => {
+        connection.query(`insert into store (name) values ('${store_name}')`, (error, results, fields) => {
             if (error) reject(error);
             else resolve(results);
         });
@@ -40,7 +40,7 @@ export const createStoreService = (store_name) => {
 
 // store 삭제
 export const deleteStoreService = (store_id) => {
-    return Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         connection.query(`delete from store where id = ${store_id}`, (error, results, fields) => {
             if (error) reject(error);
             else resolve(results);
