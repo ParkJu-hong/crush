@@ -9,6 +9,12 @@ import {
   deleteStoreController,
 } from './controllers/store.controller.js';
 
+import {
+  findAllTableByStoreController,
+  findTableByStoreController,
+  createTableController
+} from './controllers/table.controller.js';
+
 // store
 app.get('/store/findall', async (req, res)=>{
   res.json(await findAllStoreController());
@@ -24,7 +30,15 @@ app.get('/store/delete', async (req, res) => {
 });
 
 // table
-
+app.get('/table/findall', async (req, res)=>{
+  res.json(await findAllTableByStoreController(req.query.store_id));
+});
+app.get('/table/findbytablenum', async (req, res)=>{
+  res.json(await findTableByStoreController(req.query.store_id, req.query.table_num));
+});
+app.post('/table/create', async (req, res) => {
+  res.json(await createTableController(req.query.store_id, req.query.table_num));
+});
 
 
 app.listen(port, () => {
